@@ -1,38 +1,51 @@
 public class Radio {
     private int stationNum;
+    private int currentStation;
+    private int currentVolume;
+
+    public Radio() {
+        this.stationNum = 10;
+        this.currentStation = 9;
+    }
+
+    public Radio(int stationNum) {
+        this.stationNum = stationNum;
+        this.currentStation = stationNum - 1;
+    }
 
     public int getStationNum() {
         return stationNum;
+    }
+
+    public int getCurrentStation() {
+        return currentStation;
     }
 
     public void setStation(int newStation) {
         if (newStation < 0) {
             return;
         }
-        if (newStation > 9) {
+        if (newStation > stationNum) {
             return;
         }
-        stationNum = newStation;
+        currentStation = newStation;
 
     }
 
     public void nextStation() {  // Следующая станция
-        if (stationNum < 9) {
-            stationNum = stationNum + 1;
-        } else {
-            stationNum = 0;
+        currentStation++;
+        if (currentStation >= stationNum) {
+            currentStation = 0;
         }
     }
 
     public void prevStation() {  // Предыдущая станция
-        if (stationNum > 0) {
-            stationNum = stationNum - 1;
-        } else {
-            stationNum = 9;
+        currentStation--;
+        if (currentStation < 0) {
+            currentStation = stationNum - 1;
         }
     }
 
-    private int currentVolume;
 
     public int getVolume() {
         return currentVolume;
@@ -42,7 +55,7 @@ public class Radio {
         if (newVolume < 0) {
             return;
         }
-        if (newVolume > 10) {
+        if (newVolume > 100) {
             return;
         }
         currentVolume = newVolume;
@@ -50,7 +63,7 @@ public class Radio {
     }
 
     public void upVolume() {  // Увеличение громкости
-        if (currentVolume < 10) {
+        if (currentVolume < 100) {
             currentVolume = currentVolume + 1;
         }
     }
@@ -61,6 +74,4 @@ public class Radio {
         }
     }
 
-    public void Volume() {
-    }
 }
